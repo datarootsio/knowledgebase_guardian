@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "python-minimal-boilerplate"
+version = "0.1.0"
+description = "A Python project containing some minimal best-practices boilerplate"
+authors = ["Arthur Dent <arthur@dent.space>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "python_minimal_boilerplate"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+isort = "^5.10.1"
+pytest = "^7.3.1"
+pre-commit = "^3.3.2"
+ruff = "^0.0.270"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
