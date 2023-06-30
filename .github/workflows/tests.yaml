@@ -4,7 +4,7 @@ on: [push, pull_request]
 jobs:
   tests:
     env:
-      POETRY_VERSION: 1.5.0 # set your poetry version here
+      POETRY_VERSION: 1.5.1 # set your poetry version here
     runs-on: ubuntu-latest
     strategy:  # drop this if you only want to test for a specific version
       matrix:
@@ -17,7 +17,7 @@ jobs:
           python-version: ${{ matrix.python-version }} # or your python specific version
       - name: setup poetry
         run: |
-          pip install poetry==${{ env.POETRY_VERSION }} 
+          pip install poetry==${{ env.POETRY_VERSION }}
           poetry config virtualenvs.create false
           poetry install --no-interaction --no-ansi
       - name: run precommit hooks

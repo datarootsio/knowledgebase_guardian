@@ -14,7 +14,7 @@ from langchain.vectorstores import VectorStore
 from langchain.vectorstores.base import VectorStoreRetriever
 
 from docs_chunks_conversion import create_document_chunks
-from logger import INFO_LOGGER, log_consistency, log_contradiction
+from logger import INFO_LOGGER, log_contradiction_result
 from utils.deployment import get_deployment_llm
 from utils.paths import get_data_folders, get_project_root, get_vectorstore_paths
 from utils.vectorstore import load_FAISS_vectorstore, save_FAISS_vectorstore
@@ -105,9 +105,9 @@ def contradiction_detection(
         result = chain({"question": chunk.page_content})
         if result["answer"].startswith("CONSISTENT"):
             vectorstore.add_documents([chunk])
-            log_consistency(chunk, result)
+            log_contradiction_result(chunk, result, contradiction=False)
         else:
-            log_contradiction(chunk, result)
+            log_contradiction_result(chunk, result, contradiction=True)
 
     return vectorstore
 

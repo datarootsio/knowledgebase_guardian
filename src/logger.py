@@ -18,7 +18,20 @@ INFO_LOGGER = setup_logger("execution_info", "execution.log")
 CONTRADICTION_LOGGER = setup_logger("contradictions", "contradictions.log")
 
 
-def log_contradiction(doc: Document, llm_result: Dict[str, Any]):
+def get_retrieved_documents(source_docs):
+    retrieved_docs = ""
+    for i, doc in enumerate(source_docs):
+        content = doc.page_content.replace("\n", "\n\t\t")
+        retrieved_docs += f"""
+        {i+1}. Retrieved chunk from document {doc.metadata['source']} with the following content:
+        {content}
+        """  # noqa: E501
+    return retrieved_docs
+
+
+def log_contradiction_result(
+    doc: Document, llm_result: Dict[str, Any], contradiction=True
+):
     """
     Log the document for which a contradiction was detected, together with the explanation of the LLM and the documents from the vectorstore with which the new document conflicts.
 
@@ -27,24 +40,17 @@ def log_contradiction(doc: Document, llm_result: Dict[str, Any]):
         llm_result (Dict[str, Any]): The output of the LLM, describing the contradiction(s).
         logger (Logger): The logger object to use for logging the contradictions.
     """  # noqa: E501
-    source_docs = [
-        f'\t{source_doc.metadata["source"]}\n'
-        for source_doc in llm_result["source_documents"]
-    ]
+    result = "Contradiction" if contradiction else "No contradiction"
+    logger = CONTRADICTION_LOGGER if contradiction else INFO_LOGGER
 
-    answer = llm_result["answer"].replace("\n", "\n\t")
-    doc_content = doc.page_content.replace("\n", "\n\t")
-    retrieved_docs = [
-        source_doc.page_content.replace("\n", "\n\t")
-        for source_doc in llm_result["source_documents"]
-    ]
-    retrieved_docs_string = "\n\n".join(retrieved_docs)
+    retrieved_docs = get_retrieved_documents(llm_result["source_documents"])
+    answer = llm_result["answer"].replace("\n", "\n\t\t")
+    doc_content = doc.page_content.replace("\n", "\n\t\t")
 
-    CONTRADICTION_LOGGER.info(
+    logger.info(
         f"""
-        Contradiction detected for document {doc.metadata["source"]},
-        while comparing with the following documents:
-        {source_docs}
+        {result} detected for document {doc.metadata["source"]}.
+
         Conclusion from the LLM:
         {answer}
 
@@ -52,36 +58,6 @@ def log_contradiction(doc: Document, llm_result: Dict[str, Any]):
         {doc_content}
 
         Retrieved documents:
-        {retrieved_docs_string}
-    """
-    )
-
-    for source_doc in llm_result["source_documents"]:
-        CONTRADICTION_LOGGER.info(source_doc.page_content)
-
-
-def log_consistency(doc: Document, llm_result: Dict[str, Any]):
-    """
-    Log the document for which a contradiction was detected, together with the explanation of the LLM and the documents from the vectorstore with which the new document conflicts.
-
-    Args:
-        doc (Document): The new document (chunk) that conflicts with the documents in the existing vectorstore
-        llm_result (Dict[str, Any]): The output of the LLM, describing the contradiction(s).
-        logger (Logger): The logger object to use for logging the contradictions.
-    """  # noqa: E501
-    source_docs = [
-        f'{source_doc.metadata["source"]}'
-        for source_doc in llm_result["source_documents"]
-    ]
-
-    answer = llm_result["answer"].replace("\n", "\n\t")
-
-    INFO_LOGGER.info(
-        f"""
-        No contradiction detected for document {doc.metadata["source"]},
-        while comparing with the following documents:
-        {source_docs}
-        Conclusion from the LLM:
-        {answer}
+        {retrieved_docs}
     """
     )
