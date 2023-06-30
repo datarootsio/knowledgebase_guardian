@@ -1,0 +1,38 @@
+# Path to the existing vectorstore
+vectorstore_dir: "data/vectorstore"
+# Name of the existing vectorstore (and the index)
+vectorstore_name: "belgium"
+
+# Location of data that is included in the vectorstore
+raw_dir: "data/raw"
+
+#Location of data to be added to the vectorstore
+extension_dir: "data/extension"
+#Desired chunk size
+chunk_size: 1000
+#Amount of overlap between subsequent chunks
+chunk_overlap: 0
+#Extension of documents in raw_dir and extension_dir
+extension: txt
+
+# Number of most similar documents to retrieve for each chunk
+nb_retrieval_docs: 4
+# System message for the retrieval prompt
+system_message: |
+  Please analyze the given documents and compare them with the new document to identify any contradictions.
+  Note that in detecting contradictions, only instances where the new document directly contradicts information present in the provided documents
+  should be considered. If the new document introduces new information not mentioned in the other documents, it should not be treated as a contradiction.
+  Documents:
+  {summaries}
+  --------------------
+# User message for the retrieval prompt
+user_message: |
+  New document:
+  {question}
+  --------------------
+  Contradictions (if any):
+    - contradiction 1: reason + document source link in contradiction
+    - contradiction 2: reason + document source link in contradiction
+    ...
+  If you do not find any contradiction start your answer with "CONSISTENT".
+  Provide a detailed analysis of your reasonings.
