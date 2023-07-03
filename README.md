@@ -1,3 +1,4 @@
+![dataroots.png](images/dataroots.png)
 <p align="center">
   <a href="https://dataroots.io"><img alt="Maintained by dataroots" src="https://dataroots.io/maintained-rnd.svg" /></a>
 </p>
@@ -6,7 +7,7 @@
 
 This repository contains a minimal example to help you use LLM's for contradiction detection. Our use case can be visualized as follows:
 
-<img src="/images/workflow.png" width="600px">
+![workflow.png](images/workflow.png)
 
 - We have an initial vector store
 - We want to add new documents to this vector store, but are unsure if these documents are consistent with the information in the vector store.
@@ -64,7 +65,7 @@ The output is threefold:
 
 ## Limitations
 
-1. The performance of this technique is highly dependent on the prompt. You will likely need to fine-tune the prompt to your use-case.
+1. The performance of this technique is highly dependent on the prompt. You will likely need to fine-tune the prompt (i.e., the `system_message` and `user_message` in [config.yml](/config.yml)) to your use-case
 
 2. There is no consistent handling of all chunks in a document. This means that if your document is split into multiple chunks and some of them contain contradictions while others don't, some chunks will be added to the vector store and others will not. Depending on your use case, you might want to change this behaviour.
 
@@ -76,3 +77,7 @@ The output is threefold:
     Extending this code to other vector stores and file extensions is possible by leveraging Langchain or LlamaIndex.
 
 4. The code requires you to have resources deployed on Azure OpenAI. If you don't have access to Azure OpenAI, but have an OpenAI access key, you should be able to get started after some minor modifications to the codebase.
+
+## License
+
+This project is licensed under the terms of the MIT license.
