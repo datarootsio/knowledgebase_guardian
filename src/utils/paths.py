@@ -1,9 +1,20 @@
 from pathlib import Path
 from typing import Any, Dict, List
 
+import yaml
+
 
 def get_project_root() -> Path:
     return Path(__file__).parent.parent.parent
+
+
+def get_config() -> Dict[str, Any]:
+    project_root = get_project_root()
+
+    with open(f"{project_root}/config.yml", "r") as f:
+        config = yaml.safe_load(f)
+
+    return config
 
 
 def get_vectorstore_paths(config: Dict[str, Any]) -> List[Path]:

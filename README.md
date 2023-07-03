@@ -17,16 +17,22 @@ This repository contains a minimal example to help you use LLM's for contradicti
 
 ## Prerequisites
 
-Before you can run any of the code, you should first deploy an embedding and an LLM with AzureOpenAI. Make sure to fill in the necessary environment variables in the setup_azure.sh script.
+Before you can run any of the code, you should decide if you want to use Azure OpenAI or the regular OpenAI service.
 
-## Setup
+If you choose to use Azure, you should first deploy an embedding and an LLM with AzureOpenAI. Make sure to fill in the necessary environment variables in the [setup_azure.sh](/setup_azure.sh) script.
+
+If you choose the regular OpenAI service, look up your API key and complete the [setup.sh](/setup.sh) script.
+
+## Initial setup
 
 1. Make sure to [install Poetry](https://python-poetry.org/docs/#installation)
 2. In your project directory run
    1. `poetry shell`
    2. `poetry install`
    3. `pre-commit install`
-   4. `source setup_azure.sh`
+   4. a) With AzureOpenAI: `source setup_azure.sh` <br>
+      b) With OpenAI: `source setup.sh` <br>
+3. Set the `azure_openai` variable in [config.yml](/config.yml) to true if you use AzureOpenAI, else set it to false.
 
 ## Setting up your vector store
 

@@ -2,7 +2,6 @@ import argparse
 import os
 from typing import List
 
-import yaml
 from langchain.chains import RetrievalQAWithSourcesChain
 from langchain.prompts.chat import (
     ChatPromptTemplate,
@@ -16,13 +15,10 @@ from langchain.vectorstores.base import VectorStoreRetriever
 from docs_chunks_conversion import create_document_chunks
 from logger import INFO_LOGGER, log_contradiction_result
 from utils.deployment import get_deployment_llm
-from utils.paths import get_data_folders, get_project_root, get_vectorstore_paths
+from utils.paths import get_config, get_data_folders, get_vectorstore_paths
 from utils.vectorstore import load_FAISS_vectorstore, save_FAISS_vectorstore
 
-PROJECT_ROOT = get_project_root()
-
-with open(f"{PROJECT_ROOT}/config.yml", "r") as f:
-    CONFIG = yaml.safe_load(f)
+CONFIG = get_config()
 
 (
     INDEX_PATH,

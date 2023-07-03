@@ -1,13 +1,8 @@
-import yaml
-
 from docs_chunks_conversion import create_document_chunks
-from utils.paths import get_data_folders, get_project_root, get_vectorstore_paths
+from utils.paths import get_config, get_data_folders, get_vectorstore_paths
 from utils.vectorstore import create_FAISS_vectorstore, save_FAISS_vectorstore
 
-PROJECT_ROOT = get_project_root()
-
-with open(f"{PROJECT_ROOT}/config.yml", "r") as f:
-    CONFIG = yaml.safe_load(f)
+CONFIG = get_config()
 
 INDEX_PATH, VECTORSTORE_PATH, _, _ = get_vectorstore_paths(CONFIG)
 RAW_DATA_FOLDER, _ = get_data_folders(CONFIG)
