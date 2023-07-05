@@ -97,13 +97,22 @@ def contradiction_detection(
     )
     chain = get_detection_chain(retriever)
 
+    nb_valid, nb_contradiction = 0, 0
     for chunk in chunks:
         result = chain({"question": chunk.page_content})
         if result["answer"].startswith("CONSISTENT"):
             vectorstore.add_documents([chunk])
             log_contradiction_result(chunk, result, contradiction=False)
+            nb_valid += 1
         else:
             log_contradiction_result(chunk, result, contradiction=True)
+            nb_contradiction += 1
+
+    INFO_LOGGER.info(
+        f"""
+        {nb_valid} new chunks have been added to the vectorstore.
+        {nb_contradiction} chunks were found to contain contradictions and have been rejected."""  # noqa: E501
+    )
 
     return vectorstore
 
