@@ -20,6 +20,8 @@ At Dataroots, we're developing an LLM-powered Q&A system, with our internal docu
 
 Off course, these benefits are not restricted to LLM-powered Q&A systems. If you're interested to keep your knowledge consistent as well, make sure to keep reading.
 
+Keep in mind that this repo acts as a Proof of Concept and not as a full-fledged knowledge base management system.
+
 # 💡 How it works
 
 Our use case can be visualized as follows:
@@ -32,6 +34,14 @@ Our use case can be visualized as follows:
     * If no contradiction is detected, the document is added to the vector store.
     * If a contradiction is detected, the document is not added and we keep a log of the failed attempt.
 
+# Prerequisites
+
+The code in this repo will work on Linux and MacOS systems with an installed Python version of 3.8 or higher.
+
+You should have access to either Azure OpenAI or the regular OpenAI service. <br>
+When using Azure OpenAI, make sure to first deploy an embedding and an LLM. Then fill in the necessary environment variables in the [setup_azure.sh](/scripts/setup_azure.sh) script. <br>
+When using the regular OpenAI service, take note of your API key.
+
 # ⚡️ Quickstart
 
 To get you started quickly, we provided a small demo example. If you prefer to play around with your own data, you can jump ahead to the next section. <br>
@@ -41,11 +51,11 @@ In [data/vectorstore](/data/vectorstore) you'll find an index and vector store f
 To follow along with the example, **execute the following steps**:
 
 1. Make sure you have an OpenAI account and an API key.
-2. Write down your API key in [setup.sh](/scripts/setup.sh).
-3. In your terminal, run
+2. In your terminal, run
 ```bash
   . scripts/quickstart.sh
 ```
+3. Look up your OpenAI API key and run `export OPENAI_API_KEY=$YOUR_API_KEY`
 4. In your terminal, run
 ```bash
   python src/detect_contradictions.py
@@ -63,14 +73,6 @@ and this:
 
 # ⚒️ Setting up KnowledgeBase Guardian with your own data
 
-## Prerequisites
-
-Before you can run any of the code, you should decide if you want to use Azure OpenAI or the regular OpenAI service.
-
-If you choose to use Azure, you should first deploy an embedding and an LLM with AzureOpenAI. Make sure to fill in the necessary environment variables in the [setup_azure.sh](/scripts/setup_azure.sh) script.
-
-If you choose the regular OpenAI service, look up your API key and complete the [setup.sh](/scripts/setup.sh) script.
-
 ## Installing dependencies
 
 1. Create and activate a virtual environment, e.g. by running <br>
@@ -86,10 +88,7 @@ If you choose the regular OpenAI service, look up your API key and complete the 
 ```bash
     source scripts/setup_azure.sh
 ```
-3. b) For OpenAI, run
-```bash
-    source scripts/setup.sh
-```
+3. b) For OpenAI, run `export OPENAI_API_KEY=$YOUR_API_KEY`
 4. Set the `azure_openai` variable in [config.yml](/config.yml) to true if you use AzureOpenAI, else set it to false.
 
 ## Initializing your vector store
