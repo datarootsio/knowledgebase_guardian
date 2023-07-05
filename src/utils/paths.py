@@ -20,7 +20,7 @@ def get_config() -> Dict[str, Any]:
 def get_vectorstore_paths(config: Dict[str, Any]) -> List[Path]:
     project_root = get_project_root()
 
-    prefix = project_root / config['vectorstore_dir'] / config['vectorstore_name']
+    prefix = project_root / config["vectorstore_dir"] / config["vectorstore_name"]
 
     index_path = f"{prefix}.index"
     vectorstore_path = f"{prefix}.pkl"
@@ -33,7 +33,7 @@ def get_vectorstore_paths(config: Dict[str, Any]) -> List[Path]:
 def get_data_folders(config: Dict[str, Any]) -> List[Path]:
     project_root = get_project_root()
 
-    raw_dir = project_root / config['raw_dir']
-    extension_dir = project_root / config['extension_dir']
+    raw_dir = project_root / config["raw_dir"]
+    extension_dir = project_root / config["extension_dir"]
 
     return raw_dir, extension_dir
