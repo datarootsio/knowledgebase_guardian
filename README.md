@@ -38,12 +38,18 @@ To get you started quickly, we provided a small demo example. If you prefer to p
 
 In [data/vectorstore](/data/vectorstore) you'll find an index and vector store file called `belgium`. It was created from three articles about Belgian cities, which we scraped from Wikipedia and which you can find in [data/raw](/data/raw). In our example, we'll try to add three new documents to our vector store. You can find these in [data/extension](/data/extension). <br>
 
-To follow along with the example, execute the following steps:
+To follow along with the example, **execute the following steps**:
 
 1. Make sure you have an OpenAI account and an API key.
-2. Write down your API key in [setup.sh](/setup.sh).
-3. In your terminal, run `. quickstart.sh`
-4. In your terminal, run `python src/detect_contradictions.py`
+2. Write down your API key in [setup.sh](/scripts/setup.sh).
+3. In your terminal, run
+```bash
+  . scripts/quickstart.sh
+```
+4. In your terminal, run
+```bash
+  python src/detect_contradictions.py
+```
 
 This will result in the following three outputs:
 
@@ -61,19 +67,29 @@ and this:
 
 Before you can run any of the code, you should decide if you want to use Azure OpenAI or the regular OpenAI service.
 
-If you choose to use Azure, you should first deploy an embedding and an LLM with AzureOpenAI. Make sure to fill in the necessary environment variables in the [setup_azure.sh](/setup_azure.sh) script.
+If you choose to use Azure, you should first deploy an embedding and an LLM with AzureOpenAI. Make sure to fill in the necessary environment variables in the [setup_azure.sh](/scripts/setup_azure.sh) script.
 
-If you choose the regular OpenAI service, look up your API key and complete the [setup.sh](/setup.sh) script.
+If you choose the regular OpenAI service, look up your API key and complete the [setup.sh](/scripts/setup.sh) script.
 
 ## Installing dependencies
 
 1. Create and activate a virtual environment, e.g. by running <br>
-  `python3 -m venv contradiction_detection` <br>
-  `source contradiction_detection/bin/activate`
-2. Install the required dependencies by running <br>
-  `pip install -r pyproject.toml`
-3. a) For AzureOpenAI, run `source setup_azure.sh` <br>
-  b) For OpenAI, run `source setup.sh` <br>
+```bash
+    python3 -m venv contradiction_detection
+    source contradiction_detection/bin/activate
+  ```
+2. Install the required dependencies: <br>
+```bash
+    python3 -m pip install .
+  ```
+3. a) For AzureOpenAI, run
+```bash
+    source scripts/setup_azure.sh
+```
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b) For OpenAI, run
+```bash
+    source scripts/setup.sh
+```
 3. Set the `azure_openai` variable in [config.yml](/config.yml) to true if you use AzureOpenAI, else set it to false.
 
 ## Initializing your vector store
@@ -92,7 +108,10 @@ Now head over to [config.yml](/config.yml) and change the `vectorstore_name` par
 1. Place all your `.txt` data in the [data/raw](/data/raw/) folder.
 2. Head over to [config.yml](/config.yml) and change the `vectorstore_name` parameter to the desired name for your vector store.
 3. Optional: change the `chunk_size` and `chunk_overlap` parameters
-4. Run `python src/vectorstore_creation.py`. This creates a vector store and index file with the chosen name in the [data/vectorstore](/data/vectorstore/) folder.
+4. Create a vector store and index file with the chosen name in the [data/vectorstore](/data/vectorstore/) folder by running
+```bash
+    python src/vectorstore_creation.py
+```
 
 ## Extending your vector store and detecting contradictions
 
@@ -100,7 +119,10 @@ Now we want to add new documents to the vector store, but only if they are not c
 
 1. Place the `.txt` files to be added in the [data/extension](/data/extension/) folder.
 2. Optional: change the `chunk_size`, `chunk_overlap`, `nb_retrieval_docs`, `system_message` and `user_message` parameters in the [config.yml](/config.yml) file.
-3. Run `python src/detect_contradictions.py`. If you want to bypass the contradiction detection and force the extension of the vector store, you can add `--force-extend True`.
+3. Start the contradiction detection and vector store extension with the following command. To bypass the contradiction detection mechanism, add `--force-extend True`.
+```bash
+    python src/detect_contradictions.py
+```
 
 The output is threefold:
 1. A new index and vector store file in the [data/vectorstore](/data/vectorstore/) folder, recognizable by the presence of `_extended` in their name.
