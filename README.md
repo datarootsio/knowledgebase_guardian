@@ -51,7 +51,7 @@ To follow along with the example, **execute the following steps**:
   python src/detect_contradictions.py
 ```
 
-This will result in the following three outputs:
+This will result in the following three **outputs**:
 
 1. A new index and vector store file called `belgium_extended`, located in the [data/vectorstore](/data/vectorstore/) folder.
 2. A `contradictions.log` file, indicating for which new files a contradiction was detected. If all went well, you should see that the document `Leuven_contradictions` was not added to the vector store and the output should look more or less like this:
@@ -86,11 +86,11 @@ If you choose the regular OpenAI service, look up your API key and complete the 
 ```bash
     source scripts/setup_azure.sh
 ```
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b) For OpenAI, run
+3. b) For OpenAI, run
 ```bash
     source scripts/setup.sh
 ```
-3. Set the `azure_openai` variable in [config.yml](/config.yml) to true if you use AzureOpenAI, else set it to false.
+4. Set the `azure_openai` variable in [config.yml](/config.yml) to true if you use AzureOpenAI, else set it to false.
 
 ## Initializing your vector store
 
