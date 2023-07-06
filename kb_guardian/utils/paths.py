@@ -17,15 +17,15 @@ def get_config() -> Dict[str, Any]:
     return config
 
 
-def get_vectorstore_paths(config: Dict[str, Any]) -> Tuple[Path, Path, Path, Path]:
+def get_vectorstore_paths(config: Dict[str, Any]) -> Tuple[str, str, str, str]:
     project_root = get_project_root()
 
     prefix = project_root / config["vectorstore_dir"] / config["vectorstore_name"]
 
-    index_path = Path(f"{prefix}.index")
-    vectorstore_path = Path(f"{prefix}.pkl")
-    extended_index_path = Path(f"{prefix}_extended.index")
-    extended_vectorstore_path = Path(f"{prefix}_extended.pkl")
+    index_path = f"{prefix}.index"
+    vectorstore_path = f"{prefix}.pkl"
+    extended_index_path = f"{prefix}_extended.index"
+    extended_vectorstore_path = f"{prefix}_extended.pkl"
 
     return index_path, vectorstore_path, extended_index_path, extended_vectorstore_path
 
