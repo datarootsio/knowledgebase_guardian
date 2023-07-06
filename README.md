@@ -92,7 +92,7 @@ and this:
   ```
 3. Install the required dependencies: <br>
 ```bash
-    python3 -m pip install .
+    python3 -m pip install -e .
   ```
 4. a) For AzureOpenAI, run
 ```bash
