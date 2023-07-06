@@ -1,6 +1,6 @@
 [flake8]
 per-file-ignores =
-    kb_guardian/utils.paths.py:D103
+    kb_guardian/utils/paths.py:D103
     scripts/detect_contradictions.py:D103
 max-line-length = 88
 ignore = D100,D104

@@ -11,7 +11,7 @@ def get_project_root() -> Path:
 def get_config() -> Dict[str, Any]:
     project_root = get_project_root()
 
-    with open(f"{project_root}/config.yml", "r") as f:
+    with open(project_root / "config.yml", "r") as f:
         config = yaml.safe_load(f)
 
     return config
@@ -20,7 +20,7 @@ def get_config() -> Dict[str, Any]:
 def get_vectorstore_paths(config: Dict[str, Any]) -> List[Path]:
     project_root = get_project_root()
 
-    prefix = f"{project_root}/{config['vectorstore_dir']}/{config['vectorstore_name']}"
+    prefix = project_root / config["vectorstore_dir"] / config["vectorstore_name"]
 
     index_path = f"{prefix}.index"
     vectorstore_path = f"{prefix}.pkl"
@@ -33,7 +33,7 @@ def get_vectorstore_paths(config: Dict[str, Any]) -> List[Path]:
 def get_data_folders(config: Dict[str, Any]) -> List[Path]:
     project_root = get_project_root()
 
-    raw_dir = f"{project_root}/{config['raw_dir']}"
-    extension_dir = f"{project_root}/{config['extension_dir']}"
+    raw_dir = project_root / config["raw_dir"]
+    extension_dir = project_root / config["extension_dir"]
 
     return raw_dir, extension_dir

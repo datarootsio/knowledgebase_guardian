@@ -1,6 +1,9 @@
-from docs_chunks_conversion import create_document_chunks
-from utils.paths import get_config, get_data_folders, get_vectorstore_paths
-from utils.vectorstore import create_FAISS_vectorstore, save_FAISS_vectorstore
+from kb_guardian.docs_chunks_conversion import create_document_chunks
+from kb_guardian.utils.paths import get_config, get_data_folders, get_vectorstore_paths
+from kb_guardian.utils.vectorstore import (
+    create_FAISS_vectorstore,
+    save_FAISS_vectorstore,
+)
 
 CONFIG = get_config()
 

@@ -4,7 +4,6 @@ from typing import List
 import faiss
 from langchain.schema import Document
 from langchain.vectorstores import FAISS
-
 from utils.deployment import get_deployment_embedding
 
 
