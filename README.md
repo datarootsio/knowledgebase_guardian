@@ -50,15 +50,21 @@ In [data/vectorstore](/data/vectorstore) you'll find an index and vector store f
 
 To follow along with the example, **execute the following steps**:
 
-1. Make sure you have an OpenAI account and an API key.
+1. Open a terminal and clone this repository by running
+```bash
+    git clone https://github.com/datarootsio/knowledgebase_guardian.git
+```
 2. In your terminal, run
 ```bash
-  . scripts/quickstart.sh
+  . quickstart.sh
 ```
-3. Look up your OpenAI API key and run `export OPENAI_API_KEY=$YOUR_API_KEY`
+3. Make sure you have an OpenAI account. Look up your OpenAI API key and run
+```bash
+    export OPENAI_API_KEY=$YOUR_API_KEY
+```
 4. In your terminal, run
 ```bash
-  python src/detect_contradictions.py
+  python scripts/detect_contradictions.py
 ```
 
 This will result in the following three **outputs**:
@@ -75,21 +81,28 @@ and this:
 
 ## Installing dependencies
 
-1. Create and activate a virtual environment, e.g. by running <br>
+1. Open a terminal and clone this repository by running
+```bash
+    git clone https://github.com/datarootsio/knowledgebase_guardian.git
+```
+2. Create and activate a virtual environment, e.g. by running <br>
 ```bash
     python3 -m venv contradiction_detection
     source contradiction_detection/bin/activate
   ```
-2. Install the required dependencies: <br>
+3. Install the required dependencies: <br>
 ```bash
     python3 -m pip install .
   ```
-3. a) For AzureOpenAI, run
+4. a) For AzureOpenAI, run
 ```bash
-    source scripts/setup_azure.sh
+    source setup_azure.sh
 ```
-3. b) For OpenAI, run `export OPENAI_API_KEY=$YOUR_API_KEY`
-4. Set the `azure_openai` variable in [config.yml](/config.yml) to true if you use AzureOpenAI, else set it to false.
+4. b) For OpenAI, run
+```bash
+    export OPENAI_API_KEY=$YOUR_API_KEY
+```
+5. Set the `azure_openai` variable in [config.yml](/config.yml) to true if you use AzureOpenAI, else set it to false.
 
 ## Initializing your vector store
 
@@ -109,7 +122,7 @@ Now head over to [config.yml](/config.yml) and change the `vectorstore_name` par
 3. Optional: change the `chunk_size` and `chunk_overlap` parameters
 4. Create a vector store and index file with the chosen name in the [data/vectorstore](/data/vectorstore/) folder by running
 ```bash
-    python src/vectorstore_creation.py
+    python scripts/create_vectorstore.py
 ```
 
 ## Extending your vector store and detecting contradictions
@@ -120,7 +133,7 @@ Now we want to add new documents to the vector store, but only if they are not c
 2. Optional: change the `chunk_size`, `chunk_overlap`, `nb_retrieval_docs`, `system_message` and `user_message` parameters in the [config.yml](/config.yml) file.
 3. Start the contradiction detection and vector store extension with the following command. To bypass the contradiction detection mechanism, add `--force-extend True`.
 ```bash
-    python src/detect_contradictions.py
+    python scripts/detect_contradictions.py
 ```
 
 The output is threefold:
