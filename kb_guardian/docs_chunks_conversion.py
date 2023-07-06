@@ -5,7 +5,8 @@ import tqdm
 from langchain.document_loaders import TextLoader
 from langchain.schema import Document
 from langchain.text_splitter import CharacterTextSplitter
-from logger import INFO_LOGGER
+
+from kb_guardian.logger import INFO_LOGGER
 
 
 def load_text_documents(file_path: str) -> List[Document]:

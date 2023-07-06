@@ -4,7 +4,8 @@ from typing import List
 import faiss
 from langchain.schema import Document
 from langchain.vectorstores import FAISS
-from utils.deployment import get_deployment_embedding
+
+from kb_guardian.utils.deployment import get_deployment_embedding
 
 
 def create_FAISS_vectorstore(document_chunks: List[Document]) -> FAISS:

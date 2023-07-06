@@ -3,7 +3,8 @@ import os
 from langchain.chat_models import AzureChatOpenAI, ChatOpenAI
 from langchain.chat_models.base import BaseChatModel
 from langchain.embeddings import OpenAIEmbeddings
-from utils.paths import get_config
+
+from kb_guardian.utils.paths import get_config
 
 CONFIG = get_config()
 
