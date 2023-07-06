@@ -1,14 +1,15 @@
 [tool.poetry]
-name = "llm-contradiction-detection"
+name = "knowledge-base-guardian"
 version = "0.1.0"
 description = "An LLM application to safeguard the consistency of documents in a knowledge base"
 authors = ["Senne Batsleer <senne@dataroots.io>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "src"}]
+repository = "https://github.com/datarootsio/knowledgebase_guardian/"
+packages = [{include = "kb_guardian"}]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 langchain = "0.0.195"
 faiss-cpu = "1.7.3"
 llama-index = "0.6.26"

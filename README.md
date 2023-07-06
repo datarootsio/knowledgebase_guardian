@@ -36,7 +36,7 @@ Our use case can be visualized as follows:
 
 # Prerequisites
 
-The code in this repo will work on Linux and MacOS systems with an installed Python version of 3.8 or higher.
+The code in this repo will work on Linux and MacOS systems with an installed Python version of 3.9 or higher.
 
 You should have access to either Azure OpenAI or the regular OpenAI service. <br>
 When using Azure OpenAI, make sure to first deploy an embedding and an LLM. Then fill in the necessary environment variables in the [setup_azure.sh](/scripts/setup_azure.sh) script. <br>
