@@ -60,6 +60,12 @@ and uphold to the same standards. For that, we use:
 2. [isort](https://pycqa.github.io/isort/) for imports
 3. [Flake8](https://pycqa.github.io/isort/) for style enforcement
 
+### Pre-commit
+
+[`Pre-commit`](https://pre-commit.com/) is the tool that automates everything, eases the
+workflow and run checks in CI/CD. It's highly recommended installing `pre-commit` and the
+hooks during development.
+
 ## Tests 🗳
 
 Currently the code is not tested, but this will change in the future. Therefore, we ask you to include unit tests to ensure that everything works as expected.
