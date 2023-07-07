@@ -1,6 +1,8 @@
 import argparse
 import os
 
+from dotenv import load_dotenv
+
 from kb_guardian.contradiction_detection import contradiction_detection
 from kb_guardian.docs_chunks_conversion import create_document_chunks
 from kb_guardian.logger import INFO_LOGGER
@@ -8,6 +10,11 @@ from kb_guardian.utils.paths import get_config, get_data_folders, get_vectorstor
 from kb_guardian.utils.vectorstore import load_FAISS_vectorstore, save_FAISS_vectorstore
 
 CONFIG = get_config()
+
+if CONFIG["azure_openai"]:
+    load_dotenv(".env.cloud", override=True)
+else:
+    load_dotenv(".env", override=True)
 
 (
     INDEX_PATH,

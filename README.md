@@ -39,8 +39,8 @@ Our use case can be visualized as follows:
 The code in this repo will work on Linux and MacOS systems with an installed Python version of 3.9 or higher.
 
 You should have access to either Azure OpenAI or the regular OpenAI service. <br>
-When using Azure OpenAI, make sure to first deploy an embedding and an LLM. Then fill in the necessary environment variables in the [setup_azure.sh](/scripts/setup_azure.sh) script. <br>
-When using the regular OpenAI service, take note of your API key.
+For Azure OpenAI, first deploy an embedding and an LLM. Then complete the necessary environment variables in [.env.cloud](.env.cloud). <br>
+For Azure OpenAI, fill in your API key in [.env](.env).
 
 # ⚡️ Quickstart
 
@@ -54,15 +54,17 @@ To follow along with the example, **execute the following steps**:
 ```bash
     git clone https://github.com/datarootsio/knowledgebase_guardian.git
 ```
-2. In your terminal, run
+2. Go to the cloned folder and create a virtual environment. Choose your favorite one or use venv:
 ```bash
-  . quickstart.sh
+  python -m venv contradiction_detection
+  source contradiction_detection/bin/activate
 ```
-3. Make sure you have an OpenAI account. Look up your OpenAI API key and run
+3. Install the dependencies:
 ```bash
-    export OPENAI_API_KEY=$YOUR_API_KEY
+  python -m pip install -e .
 ```
-4. In your terminal, run
+4. Make sure you have an OpenAI account. Look up your OpenAI API key and write it down in [.env](.env)
+5. In your terminal, run
 ```bash
   python scripts/detect_contradictions.py
 ```
@@ -94,14 +96,8 @@ and this:
 ```bash
     python3 -m pip install -e .
   ```
-4. a) For AzureOpenAI, run
-```bash
-    source setup_azure.sh
-```
-4. b) For OpenAI, run
-```bash
-    export OPENAI_API_KEY=$YOUR_API_KEY
-```
+4. For AzureOpenAI, complete the [.env.cloud](.env.cloud) file. <br>
+For OpenAI, complete the [.env](.env) file.
 5. Set the `azure_openai` variable in [config.yml](/config.yml) to true if you use AzureOpenAI, else set it to false.
 
 ## Initializing your vector store
