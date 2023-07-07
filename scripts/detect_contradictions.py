@@ -1,5 +1,6 @@
 import argparse
 import os
+from argparse import Namespace
 
 from dotenv import load_dotenv
 
@@ -25,7 +26,13 @@ else:
 RAW_DATA_FOLDER, EXTENSION_DATA_FOLDER = get_data_folders(CONFIG)
 
 
-def parse_arguments():
+def parse_arguments() -> Namespace:
+    """
+    Parse and return arguments for the contradiction detection mechanism.
+
+    Returns:
+        Namespace: The arguments necessary for contradiction detection
+    """
     parser = argparse.ArgumentParser(description="Extend vectorstores")
 
     parser.add_argument(
