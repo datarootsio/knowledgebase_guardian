@@ -5,7 +5,9 @@
 
 <p align="center">
   <a href="https://dataroots.io"><img alt="Maintained by dataroots" src="https://dataroots.io/maintained-rnd.svg" /></a>
+  <a href="https://img.shields.io"><img alt="Python versions" src="https://img.shields.io/badge/python-3.9-green" /> <img alt="Python versions" src="https://img.shields.io/badge/3.10-green"/> <img alt="Python versions" src="https://img.shields.io/badge/3.11-green"/>  </a>
   <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg" /></a>
+   <a href="http://mypy-lang.org/"><img alt="Mypy checked" src="https://img.shields.io/badge/mypy-checked-1f5082.svg" /></a>
   <img alt="Github License" src="https://img.shields.io/badge/License-MIT-green.svg" />
 </p>
 
