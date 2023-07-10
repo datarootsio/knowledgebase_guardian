@@ -11,7 +11,7 @@
   <img alt="Github License" src="https://img.shields.io/badge/License-MIT-green.svg" />
 </p>
 
-Welcome to the KnowledgeBase Guardian, an LLM-powered solution to keep your knowledge base consistent and free of contradictions! <br>
+Welcome to the KnowledgeBase Guardian, an LLM-powered solution to **keep your knowledge base consistent and free of contradictions**! How, you ask? Well, every time you want to add new information to your knowledge base, the Guardian will check that it does not conflict with information that is already contained in there. <br>
 
 Regardless of the purpose of your knowledge base, maintaining consistency is highly desirable. However, in a large and constantly evolving knowledge base, this can prove to be a challenging task. <br>
 
@@ -38,19 +38,11 @@ Our use case can be visualized as follows:
 
 # Prerequisites
 
-The code in this repo will work on Linux and MacOS systems with an installed Python version of 3.9 or higher.
+- OS: Linux or MacOS
+- Python: 3.9 or higher
+- OpenAI account <br> OR <br> Azure OpenAI with deployed embedding and LLM
 
-You should have access to either Azure OpenAI or the regular OpenAI service. <br>
-For Azure OpenAI, first deploy an embedding and an LLM. Then complete the necessary environment variables in [.env.cloud](.env.cloud). <br>
-For Azure OpenAI, fill in your API key in [.env](.env).
-
-# ⚡️ Quickstart
-
-To get you started quickly, we provided a small demo example. If you prefer to play around with your own data, you can jump ahead to the next section. <br>
-
-In [data/vectorstore](/data/vectorstore) you'll find an index and vector store file called `belgium`. It was created from three articles about Belgian cities, which we scraped from Wikipedia and which you can find in [data/raw](/data/raw). In our example, we'll try to add three new documents to our vector store. You can find these in [data/extension](/data/extension). <br>
-
-To follow along with the example, **execute the following steps**:
+# ⚙️ Setup
 
 1. Open a terminal and clone this repository by running
 ```bash
@@ -65,8 +57,18 @@ To follow along with the example, **execute the following steps**:
 ```bash
   python -m pip install -e .
 ```
-4. Make sure you have an OpenAI account. Look up your OpenAI API key and write it down in [.env](.env)
-5. In your terminal, run
+
+# ⚡️ Quickstart
+
+We provide a small demo example to get started right away. If you prefer to play around with your own data, you can jump ahead to the next section. <br>
+
+In [data/vectorstore](/data/vectorstore) you'll find an index and vector store file called `belgium`. It was created from three articles about Belgian cities, which we scraped from Wikipedia and which you can find in [data/raw](/data/raw). In our example, we'll try to add three new documents to our vector store. You can find these in [data/extension](/data/extension). <br>
+
+To follow along with the example, follow the setup section above and **execute the following steps**:
+
+
+1. Make sure you have an OpenAI account. Look up your OpenAI API key and write it down in [.env](.env)
+2. In your terminal, run
 ```bash
   python scripts/detect_contradictions.py
 ```
@@ -83,24 +85,13 @@ and this:
 
 # ⚒️ Setting up KnowledgeBase Guardian with your own data
 
-## Installing dependencies
+Make sure to first execute the steps of the setup section above.
 
-1. Open a terminal and clone this repository by running
-```bash
-    git clone https://github.com/datarootsio/knowledgebase_guardian.git
-```
-2. Create and activate a virtual environment, e.g. by running <br>
-```bash
-    python3 -m venv contradiction_detection
-    source contradiction_detection/bin/activate
-  ```
-3. Install the required dependencies: <br>
-```bash
-    python3 -m pip install -e .
-  ```
-4. For AzureOpenAI, complete the [.env.cloud](.env.cloud) file. <br>
+## Choose OpenAI or Azure OpenAI
+
+1. For AzureOpenAI, complete the [.env.cloud](.env.cloud) file. <br>
 For OpenAI, complete the [.env](.env) file.
-5. Set the `azure_openai` variable in [config.yml](/config.yml) to true if you use AzureOpenAI, else set it to false.
+2. Set the `azure_openai` variable in [config.yml](/config.yml) to true if you use AzureOpenAI, else set it to false.
 
 ## Initializing your vector store
 
