@@ -10,11 +10,11 @@ packages = [{include = "kb_guardian"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-langchain = "0.0.195"
+langchain = "0.0.213"
 faiss-cpu = "1.7.3"
 llama-index = "0.6.26"
 python-dotenv = "1.0.0"
-
+transformers = "4.30.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
