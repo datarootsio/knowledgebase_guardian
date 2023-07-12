@@ -1,5 +1,5 @@
 from langchain.schema import Document
-from pytest.logging import LogCaptureFixture
+from pytest import LogCaptureFixture
 
 from kb_guardian.logger import format_retrieved_documents, log_contradiction_result
 
