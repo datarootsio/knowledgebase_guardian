@@ -5,8 +5,8 @@ from langchain.chains import RetrievalQAWithSourcesChain
 from langchain.chat_models.fake import FakeListChatModel
 from langchain.llms.fake import FakeListLLM
 from langchain.schema import Document
+from pytest.logging import LogCaptureFixture
 from pytest_mock import MockerFixture
-from pytest_mock.logging import LogCaptureFixture
 
 from kb_guardian.contradiction_detection import (
     contradiction_detection,
