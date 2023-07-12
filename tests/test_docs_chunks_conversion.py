@@ -1,5 +1,5 @@
 from langchain.schema import Document
-from pytest_mock import LogCaptureFixture
+from pytest_mock.logging import LogCaptureFixture
 
 from kb_guardian.docs_chunks_conversion import (
     create_document_chunks,
