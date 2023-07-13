@@ -6,7 +6,7 @@ from langchain.document_loaders import TextLoader
 from langchain.schema import Document
 from langchain.text_splitter import CharacterTextSplitter
 
-from logger import INFO_LOGGER
+from kb_guardian.logger import INFO_LOGGER
 
 
 def load_text_documents(file_path: str) -> List[Document]:
@@ -60,8 +60,7 @@ def create_document_chunks(
     chunk_overlap: int,
 ) -> List[Document]:
     """
-    Converts documents present in the data source into a list of LangChain Documents,
-    then splits those Document into smaller chunks, digestible by the LLM.
+    Convert documents present in the data source into a list of LangChain Documents, then split those Documents into smaller chunks, digestible by the LLM.
 
     Args:
         data_path (str): The path to the data source.
@@ -72,7 +71,7 @@ def create_document_chunks(
     Returns:
         List[Document]: A list of document chunks created from the data sources.
 
-    """
+    """  # noqa: E501
     documents = []
 
     files = [str(p.resolve()) for p in Path(data_path).glob(f"**/*.{extension}")]

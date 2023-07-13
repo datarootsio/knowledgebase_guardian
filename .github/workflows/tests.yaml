@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:  # drop this if you only want to test for a specific version
       matrix:
-        python-version: ["3.10", "3.11"]
+        python-version: ["3.9", "3.10", "3.11"]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }} # or your python specific version
@@ -22,3 +22,11 @@ jobs:
           poetry install --no-interaction --no-ansi
       - name: run precommit hooks
         run: pre-commit run --all-files
+      - name: Unit tests
+        run: |
+          poetry run pytest -vv
+      - name: Coverage report
+        run: |
+          poetry run pytest --cov=./ --cov-report=xml
+      - name: Upload coverage
+        uses: codecov/codecov-action@v1

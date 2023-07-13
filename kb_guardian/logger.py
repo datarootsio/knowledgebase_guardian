@@ -1,10 +1,21 @@
 import logging
-from typing import Any, Dict
+from logging import Logger
+from typing import Any, Dict, List
 
 from langchain.schema import Document
 
 
-def setup_logger(logger_name: str, file_name: str):
+def setup_logger(logger_name: str, file_name: str) -> Logger:
+    """
+    Initialize a logger that writes to a certain file.
+
+    Args:
+        logger_name (str): The name of the logger
+        file_name (str): The file to which the logger should write
+
+    Returns:
+        Logger: A logger object
+    """
     logger = logging.getLogger(logger_name)
     handler = logging.FileHandler(file_name)
     formatter = logging.Formatter("%(asctime)s - %(message)s")
@@ -18,7 +29,16 @@ INFO_LOGGER = setup_logger("execution_info", "execution.log")
 CONTRADICTION_LOGGER = setup_logger("contradictions", "contradictions.log")
 
 
-def get_retrieved_documents(source_docs):
+def format_retrieved_documents(source_docs: List[Document]) -> str:
+    """
+    Format the content of the retrieved documents in a format suitable for logging.
+
+    Args:
+        source_docs (List[Document]): a list of retrieved Langchain Documents
+
+    Returns:
+        str: A single string containing a formatted version of the content of the retrieved documents.
+    """  # noqa: E501
     retrieved_docs = ""
     for i, doc in enumerate(source_docs):
         content = doc.page_content.replace("\n", "\n\t\t")
@@ -43,7 +63,7 @@ def log_contradiction_result(
     result = "Contradiction" if contradiction else "No contradiction"
     logger = CONTRADICTION_LOGGER if contradiction else INFO_LOGGER
 
-    retrieved_docs = get_retrieved_documents(llm_result["source_documents"])
+    retrieved_docs = format_retrieved_documents(llm_result["source_documents"])
     answer = llm_result["answer"].replace("\n", "\n\t\t")
     doc_content = doc.page_content.replace("\n", "\n\t\t")
 

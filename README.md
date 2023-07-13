@@ -5,11 +5,13 @@
 
 <p align="center">
   <a href="https://dataroots.io"><img alt="Maintained by dataroots" src="https://dataroots.io/maintained-rnd.svg" /></a>
+  <a href="https://img.shields.io"><img alt="Python versions" src="https://img.shields.io/badge/python-3.9-green" /> <img alt="Python versions" src="https://img.shields.io/badge/3.10-green"/> <img alt="Python versions" src="https://img.shields.io/badge/3.11-green"/>  </a>
   <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg" /></a>
+   <a href="http://mypy-lang.org/"><img alt="Mypy checked" src="https://img.shields.io/badge/mypy-checked-1f5082.svg" /></a>
   <img alt="Github License" src="https://img.shields.io/badge/License-MIT-green.svg" />
 </p>
 
-Welcome to the KnowledgeBase Guardian, an LLM-powered solution to keep your knowledge base consistent and free of contradictions! <br>
+Welcome to the KnowledgeBase Guardian, an LLM-powered solution to **keep your knowledge base consistent and free of contradictions**! How, you ask? Well, every time you want to add new information to your knowledge base, the Guardian will check that it does not conflict with information that is already contained in there. <br>
 
 Regardless of the purpose of your knowledge base, maintaining consistency is highly desirable. However, in a large and constantly evolving knowledge base, this can prove to be a challenging task. <br>
 
@@ -19,6 +21,8 @@ At Dataroots, we're developing an LLM-powered Q&A system, with our internal docu
 - **Simplified maintenance**: By automating conflict detection as much as possible, we reduce the manual effort required to maintain the knowledge base.
 
 Off course, these benefits are not restricted to LLM-powered Q&A systems. If you're interested to keep your knowledge consistent as well, make sure to keep reading.
+
+Keep in mind that this repo acts as a Proof of Concept and not as a full-fledged knowledge base management system.
 
 # 💡 How it works
 
@@ -32,23 +36,41 @@ Our use case can be visualized as follows:
     * If no contradiction is detected, the document is added to the vector store.
     * If a contradiction is detected, the document is not added and we keep a log of the failed attempt.
 
+# Prerequisites
+
+- OS: Linux or MacOS
+- Python: 3.9 or higher
+- OpenAI account <br> OR <br> Azure OpenAI with deployed embedding and LLM
+
+# ⚙️ Setup
+
+1. Open a terminal and clone this repository by running
+```bash
+    git clone https://github.com/datarootsio/knowledgebase_guardian.git
+```
+2. Go to the cloned folder and create a virtual environment. Choose your favorite one or use venv:
+```bash
+  python -m venv contradiction_detection
+  source contradiction_detection/bin/activate
+```
+3. Install the dependencies:
+```bash
+  python -m pip install -e .
+```
+
 # ⚡️ Quickstart
 
-To get you started quickly, we provided a small demo example. If you prefer to play around with your own data, you can jump ahead to the next section. <br>
+We provide a small demo example to get started right away. If you prefer to play around with your own data, you can jump ahead to the next section. <br>
 
 In [data/vectorstore](/data/vectorstore) you'll find an index and vector store file called `belgium`. It was created from three articles about Belgian cities, which we scraped from Wikipedia and which you can find in [data/raw](/data/raw). In our example, we'll try to add three new documents to our vector store. You can find these in [data/extension](/data/extension). <br>
 
-To follow along with the example, **execute the following steps**:
+To follow along with the example, follow the setup section above and **execute the following steps**:
 
-1. Make sure you have an OpenAI account and an API key.
-2. Write down your API key in [setup.sh](/scripts/setup.sh).
-3. In your terminal, run
+
+1. Make sure you have an OpenAI account. Look up your OpenAI API key and write it down in [.env](.env)
+2. In your terminal, run
 ```bash
-  . scripts/quickstart.sh
-```
-4. In your terminal, run
-```bash
-  python src/detect_contradictions.py
+  python scripts/detect_contradictions.py
 ```
 
 This will result in the following three **outputs**:
@@ -63,34 +85,13 @@ and this:
 
 # ⚒️ Setting up KnowledgeBase Guardian with your own data
 
-## Prerequisites
+Make sure to first execute the steps of the setup section above.
 
-Before you can run any of the code, you should decide if you want to use Azure OpenAI or the regular OpenAI service.
+## Choose OpenAI or Azure OpenAI
 
-If you choose to use Azure, you should first deploy an embedding and an LLM with AzureOpenAI. Make sure to fill in the necessary environment variables in the [setup_azure.sh](/scripts/setup_azure.sh) script.
-
-If you choose the regular OpenAI service, look up your API key and complete the [setup.sh](/scripts/setup.sh) script.
-
-## Installing dependencies
-
-1. Create and activate a virtual environment, e.g. by running <br>
-```bash
-    python3 -m venv contradiction_detection
-    source contradiction_detection/bin/activate
-  ```
-2. Install the required dependencies: <br>
-```bash
-    python3 -m pip install .
-  ```
-3. a) For AzureOpenAI, run
-```bash
-    source scripts/setup_azure.sh
-```
-3. b) For OpenAI, run
-```bash
-    source scripts/setup.sh
-```
-4. Set the `azure_openai` variable in [config.yml](/config.yml) to true if you use AzureOpenAI, else set it to false.
+1. For AzureOpenAI, complete the [.env.cloud](.env.cloud) file. <br>
+For OpenAI, complete the [.env](.env) file.
+2. Set the `azure_openai` variable in [config.yml](/config.yml) to true if you use AzureOpenAI, else set it to false.
 
 ## Initializing your vector store
 
@@ -110,7 +111,7 @@ Now head over to [config.yml](/config.yml) and change the `vectorstore_name` par
 3. Optional: change the `chunk_size` and `chunk_overlap` parameters
 4. Create a vector store and index file with the chosen name in the [data/vectorstore](/data/vectorstore/) folder by running
 ```bash
-    python src/vectorstore_creation.py
+    python scripts/create_vectorstore.py
 ```
 
 ## Extending your vector store and detecting contradictions
@@ -121,7 +122,7 @@ Now we want to add new documents to the vector store, but only if they are not c
 2. Optional: change the `chunk_size`, `chunk_overlap`, `nb_retrieval_docs`, `system_message` and `user_message` parameters in the [config.yml](/config.yml) file.
 3. Start the contradiction detection and vector store extension with the following command. To bypass the contradiction detection mechanism, add `--force-extend True`.
 ```bash
-    python src/detect_contradictions.py
+    python scripts/detect_contradictions.py
 ```
 
 The output is threefold:

@@ -4,7 +4,7 @@ from langchain.chat_models import AzureChatOpenAI, ChatOpenAI
 from langchain.chat_models.base import BaseChatModel
 from langchain.embeddings import OpenAIEmbeddings
 
-from utils.paths import get_config
+from kb_guardian.utils.paths import get_config
 
 CONFIG = get_config()
 
@@ -12,6 +12,7 @@ CONFIG = get_config()
 def get_deployment_embedding() -> OpenAIEmbeddings:
     """
     Depending on the configuration, returns an embedding deployed on Azure or an embedding specified by the config file.
+
     When using AzureOpenAI, the DEPLOYMENT_EMBEDDING environment variable should be set.
 
     Returns:
@@ -30,6 +31,7 @@ def get_deployment_embedding() -> OpenAIEmbeddings:
 def get_deployment_llm() -> BaseChatModel:
     """
     Depending on the configuration, returns an LLM deployed on Azure or an LLM specified by the config file.
+
     When using AzureOpenAI, the DEPLOYMENT_LLM environment variable should be set.
 
     Returns:
