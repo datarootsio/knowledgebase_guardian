@@ -8,19 +8,23 @@ from langchain.vectorstores import FAISS
 from kb_guardian.utils.deployment import get_deployment_embedding
 
 
-def create_FAISS_vectorstore(document_chunks: List[Document]) -> FAISS:
+def create_FAISS_vectorstore(
+    document_chunks: List[Document], azure_openai: bool, embedding_model: str
+) -> FAISS:
     """
     Create a FAISS vector store from a list of LangChain Document chunks.
 
     Args:
         document_chunks (List[Document]): A list of LangChain Document chunks
           to create the vector store from.
+        azure_openai (bool): True if using an embedding deployed on Azure OpenAI, else False.
+        embedding_model (str): OpenAI embedding model to use for the vectorstore creation. This argument is not relevant when using Azure OpenAI.
 
     Returns:
         FAISS: The created FAISS vector store.
 
-    """
-    embedding = get_deployment_embedding()
+    """  # noqa: E501
+    embedding = get_deployment_embedding(azure_openai, embedding_model)
     vectorstore = FAISS.from_documents(document_chunks, embedding)
     return vectorstore
 

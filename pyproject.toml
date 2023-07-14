@@ -1,21 +1,23 @@
 [tool.poetry]
 name = "knowledge-base-guardian"
-version = "0.1.0"
+version = "0.0.11"
 description = "An LLM application to safeguard the consistency of documents in a knowledge base"
 authors = ["Senne Batsleer <senne@dataroots.io>"]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/datarootsio/knowledgebase_guardian/"
 packages = [{include = "kb_guardian"}]
+include = ["default_config.yml"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
 langchain = "0.0.213"
 faiss-cpu = "1.7.3"
-llama-index = "0.6.26"
 python-dotenv = "1.0.0"
 transformers = "4.30.2"
 bs4 = "0.0.1"
+openai = "^0.27.0"
+tiktoken = "^0.4.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"

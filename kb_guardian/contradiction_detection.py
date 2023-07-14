@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, Dict, List
 
 from langchain.chains import RetrievalQAWithSourcesChain
 from langchain.prompts.chat import (
@@ -12,26 +12,26 @@ from langchain.vectorstores.base import VectorStoreRetriever
 
 from kb_guardian.logger import INFO_LOGGER, log_contradiction_result
 from kb_guardian.utils.deployment import get_deployment_llm
-from kb_guardian.utils.paths import get_config
-
-CONFIG = get_config()
 
 
-def get_detection_chain(retriever: VectorStoreRetriever) -> RetrievalQAWithSourcesChain:
+def get_detection_chain(
+    retriever: VectorStoreRetriever, config: Dict[str, Any]
+) -> RetrievalQAWithSourcesChain:
     """
     Construct and return an LLM chain to detect contradictions at ingestion time.
 
     Args:
         retriever (VectorStoreRetriever): A retriever for the vector store to which you want to add new documents
+        config (Dict[str, Any]): configuration specifying the prompt messages and which LLM to use.
 
     Returns:
         RetrievalQAWithSourcesChain: A retrieval chain that allows you to detect contradictions
     """  # noqa: E501
-    llm = get_deployment_llm()
+    llm = get_deployment_llm(config["azure_openai"], config["llm"])
 
     messages = [
-        SystemMessagePromptTemplate.from_template(CONFIG["system_message"]),
-        HumanMessagePromptTemplate.from_template(CONFIG["user_message"]),
+        SystemMessagePromptTemplate.from_template(config["system_message"]),
+        HumanMessagePromptTemplate.from_template(config["user_message"]),
     ]
     prompt = ChatPromptTemplate.from_messages(messages)
 
@@ -52,8 +52,7 @@ def get_detection_chain(retriever: VectorStoreRetriever) -> RetrievalQAWithSourc
 
 
 def contradiction_detection(
-    vectorstore: VectorStore,
-    chunks: List[Document],
+    vectorstore: VectorStore, chunks: List[Document], config: Dict[str, Any]
 ) -> VectorStore:
     """
     Use an LLM to detect inconsistencies / contradictions between the documents in a vectorstore and the documents that should be added to that vectorstore.
@@ -64,14 +63,15 @@ def contradiction_detection(
     Args:
         vectorstore (VectorStore): An existing vectorstore to which you want to add new information
         docs_chunks (List[Document]): Chunks of the new documents you want to add
+        config (Dict[str, Any]): configuration containing settings for the detection retrieval chain.
 
     Returns:
         VectorStore: An updated version of the vectorstore, including the new documents that do not contradict the existing documents.
     """  # noqa: E501
     retriever = vectorstore.as_retriever(
-        search_kwargs={"k": CONFIG["nb_retrieval_docs"]}
+        search_kwargs={"k": config["nb_retrieval_docs"]}
     )
-    chain = get_detection_chain(retriever)
+    chain = get_detection_chain(retriever, config)
 
     nb_valid, nb_contradiction = 0, 0
     for chunk in chunks:

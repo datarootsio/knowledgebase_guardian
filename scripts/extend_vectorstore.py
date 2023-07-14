@@ -3,7 +3,7 @@ from argparse import Namespace
 
 from dotenv import load_dotenv
 
-from kb_guardian.kb_management import create_vectorstore
+from kb_guardian.kb_management import extend_vectorstore
 from kb_guardian.utils.paths import get_config, get_default_config
 
 DEFAULT_CONFIG = get_default_config()
@@ -11,12 +11,12 @@ DEFAULT_CONFIG = get_default_config()
 
 def parse_arguments() -> Namespace:
     """
-    Parse and return arguments for the vectorstore creation.
+    Parse and return arguments for the contradiction detection mechanism.
 
     Returns:
-        Namespace: The arguments necessary for vectorstore creation
+        Namespace: The arguments necessary for contradiction detection
     """
-    parser = argparse.ArgumentParser(description="Create vectorstore")
+    parser = argparse.ArgumentParser(description="Extend vectorstores")
 
     parser.add_argument(
         "--config-file",
@@ -24,6 +24,13 @@ def parse_arguments() -> Namespace:
         help="The location of the config file",
     )
 
+    parser.add_argument(
+        "--disable-contradiction-detection",
+        dest="detect_contradictions",
+        action="store_false",
+        help="Disable contradiction detection and extend the vectorstore by force",  # noqa: E501
+    )
+    parser.set_defaults(detect_contradictions=True)
     args = parser.parse_args()
     return args
 
@@ -41,4 +48,4 @@ if __name__ == "__main__":
     else:
         load_dotenv(".env", override=True)
 
-    create_vectorstore(config)
+    extend_vectorstore(config, args.detect_contradictions)

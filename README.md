@@ -74,7 +74,7 @@ To follow along with the example, follow the setup section above and **execute t
 1. Make sure you have an OpenAI account. Look up your OpenAI API key and write it down in [.env](.env)
 2. In your terminal, run
 ```bash
-  python scripts/detect_contradictions.py
+  python scripts/extend_vectorstore.py
 ```
 
 This will result in the following three **outputs**:
@@ -124,9 +124,9 @@ Now we want to add new documents to the vector store, but only if they are not c
 
 1. Place the `.txt` files to be added in the [data/extension](/data/extension/) folder.
 2. Optional: change the `chunk_size`, `chunk_overlap`, `nb_retrieval_docs`, `system_message` and `user_message` parameters in the [config.yml](/config.yml) file.
-3. Start the contradiction detection and vector store extension with the following command. To bypass the contradiction detection mechanism, add `--force-extend True`.
+3. Start the contradiction detection and vector store extension with the following command. To bypass the contradiction detection mechanism, add `--disable-contradiction-detection`.
 ```bash
-    python scripts/detect_contradictions.py
+    python scripts/extend_vectorstore.py
 ```
 
 The output is threefold:
