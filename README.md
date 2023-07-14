@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://github.com/SenneDataroots/llm_contradiction_detection/blob/main/images/kbg.png?raw=true">
+<img src="https://github.com/datarootsio/knowledgebase_guardian/blob/main/images/kbg.png?raw=true">
 </div>
 
 <p align="center">
@@ -9,9 +9,13 @@
   <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg" /></a>
    <a href="http://mypy-lang.org/"><img alt="Mypy checked" src="https://img.shields.io/badge/mypy-checked-1f5082.svg" /></a>
   <img alt="Github License" src="https://img.shields.io/badge/License-MIT-green.svg" />
+  <a href="https://pepy.tech/project/databooks"><img alt="Codecov" src="https://codecov.io/github/datarootsio/knowledgebase_guardian/main/graph/badge.svg" /></a>
+  <a href="https://github.com/datarootsio/knowledgebase_guardian/actions"><img alt="test" src="https://github.com/datarootsio/knowledgebase_guardian/actions/workflows/tests.yaml/badge.svg" /></a>
 </p>
 
-Welcome to the KnowledgeBase Guardian, an LLM-powered solution to **keep your knowledge base consistent and free of contradictions**! How, you ask? Well, every time you want to add new information to your knowledge base, the Guardian will check that it does not conflict with information that is already contained in there. <br>
+Welcome to the KnowledgeBase Guardian, an LLM-powered solution to **keep your knowledge base consistent and free of contradictions**! How, you ask? Well, every time you want to add new information to your knowledge base, the Guardian will check that it does not conflict with information that is already contained in there. To grasp the general idea, feel free to have a look at this notebook: <a target="_blank" href="https://colab.research.google.com/drive/19iywHcBs12GwGBqhbKrgazWHx_q2YQW4#scrollTo=t6IqtnOgcM-n">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>. <br>
 
 Regardless of the purpose of your knowledge base, maintaining consistency is highly desirable. However, in a large and constantly evolving knowledge base, this can prove to be a challenging task. <br>
 
@@ -22,7 +26,7 @@ At Dataroots, we're developing an LLM-powered Q&A system, with our internal docu
 
 Off course, these benefits are not restricted to LLM-powered Q&A systems. If you're interested to keep your knowledge consistent as well, make sure to keep reading.
 
-Keep in mind that this repo acts as a Proof of Concept and not as a full-fledged knowledge base management system.
+Keep in mind that this repo currently acts as a Proof of Concept and not as a full-fledged knowledge base management system.
 
 # 💡 How it works
 
